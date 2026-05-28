@@ -97,10 +97,10 @@
             display: none;
         }
 
-        /* --- Letter Screen --- */
+        /* --- Letter Screen Container --- */
         .letter-container {
             display: none;
-            position: absolute;
+            position: relative;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -118,8 +118,7 @@
             border-bottom-left-radius: 8px;
             border-bottom-right-radius: 8px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            margin-top: 50px;
-            transition: transform 0.8s ease-in-out;
+            transition: transform 1s ease-in-out;
         }
 
         /* Envelope Front Flaps */
@@ -180,11 +179,13 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.05);
             z-index: 2;
             
-            /* Smooth transitions for moving and resizing */
-            transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1) 0.6s, 
-                        height 0.8s ease 0.8s, 
-                        width 0.8s ease 0.8s, 
-                        left 0.8s ease 0.8s;
+            /* Powerful dynamic transition handling movement, resizing, and centering */
+            transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1), 
+                        height 0.8s ease, 
+                        width 0.8s ease,
+                        top 0.8s ease,
+                        left 0.8s ease,
+                        bottom 0.8s ease;
             color: #333;
         }
 
@@ -192,37 +193,40 @@
             font-size: 14px;
             line-height: 1.6;
             opacity: 0;
-            transition: opacity 0.5s ease 1.4s;
+            transition: opacity 0.5s ease 1s;
             text-align: left;
             height: 100%;
-            overflow-y: auto; /* Adds scrolling capability if your letter is long */
+            overflow-y: auto; 
         }
 
         /* --- Animated States --- */
         
-        /* Step 1: Lid opens up */
+        /* 1. Lid opens */
         .open-envelope .envelope-lid {
             transform: rotateX(180deg);
             z-index: 1; 
         }
 
-        /* Step 2: Paper pulls OUT, comes DOWN, and centers on screen */
-        .open-envelope .letter-paper {
-            /* Translates upward out of envelope, then scales/shifts right into center focus */
-            transform: translateY(-110px) scale(1); 
-            height: 400px;  
-            width: 350px;
-            left: -25px; /* Centers relative to the 300px envelope wrapper */
-            z-index: 5;    
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Shift down the envelope slightly as the letter comes up to create beautiful spacing */
+        /* 2. Push the envelope downward slightly to make absolute room */
         .open-envelope .envelope-wrapper {
-            transform: translateY(80px);
+            transform: translateY(120px);
         }
 
-        /* Step 3: Text reveals beautifully */
+        /* 3. The Letter paper shoots UP out of envelope, then breaks free to center perfectly */
+        .open-envelope .letter-paper {
+            position: fixed; /* Forces it out of the container layout constraints */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Keeps it completely locked to the center of any viewport */
+            height: 450px;  
+            width: 360px;
+            max-width: 90vw;
+            max-height: 75vh;
+            z-index: 50;    
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        /* 4. Text fades in cleanly */
         .open-envelope .letter-text {
             opacity: 1;
         }
@@ -281,10 +285,10 @@
                     setTimeout(() => {
                         letterPage.style.opacity = "1";
                         
-                        // Triggers the sequence automatically
+                        // Triggers the opening animation sequence
                         setTimeout(() => {
                             envelope.classList.add("open-envelope");
-                        }, 600);
+                        }, 500);
                         
                     }, 50);
                 }, 500);
