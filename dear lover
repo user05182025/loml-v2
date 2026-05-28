@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Love Letter Animation</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body{
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:#7aa8d8; /* CHANGE BACKGROUND COLOR */
+      overflow:hidden;
+    }
+
+    .container{
+      position:relative;
+      width:350px;
+      height:300px;
+    }
+
+    /* PAPER */
+    .letter{
+      position:absolute;
+      width:280px;
+      height:190px;
+      background:white;
+      left:35px;
+      bottom:60px;
+      border-radius:10px;
+      padding:20px;
+      z-index:1;
+
+      animation: pullOut 4s ease-in-out infinite;
+    }
+
+    .letter h2{
+      color:#4a76a8;
+      margin-bottom:10px;
+      font-size:22px;
+    }
+
+    .letter p{
+      font-size:14px;
+      color:#555;
+      line-height:1.6;
+    }
+
+    /* ENVELOPE BODY */
+    .envelope{
+      position:absolute;
+      width:350px;
+      height:220px;
+      bottom:0;
+      left:0;
+    }
+
+    .base{
+      position:absolute;
+      width:100%;
+      height:100%;
+      background:#5f8fc4; /* CHANGE ENVELOPE COLOR */
+      border-radius:0 0 15px 15px;
+      z-index:3;
+    }
+
+    /* TOP FLAP */
+    .flap{
+      position:absolute;
+      width:0;
+      height:0;
+      border-left:175px solid transparent;
+      border-right:175px solid transparent;
+      border-top:120px solid #4d7caf;
+      top:0;
+      transform-origin:top;
+      animation: flapOpen 4s ease-in-out infinite;
+      z-index:4;
+    }
+
+    /* LEFT TRIANGLE */
+    .left{
+      position:absolute;
+      width:0;
+      height:0;
+      border-top:110px solid transparent;
+      border-bottom:110px solid transparent;
+      border-left:175px solid #6c9cd1;
+      z-index:5;
+    }
+
+    /* RIGHT TRIANGLE */
+    .right{
+      position:absolute;
+      right:0;
+      width:0;
+      height:0;
+      border-top:110px solid transparent;
+      border-bottom:110px solid transparent;
+      border-right:175px solid #6c9cd1;
+      z-index:5;
+    }
+
+    /* BOTTOM TRIANGLE */
+    .bottom{
+      position:absolute;
+      bottom:0;
+      width:0;
+      height:0;
+      border-left:175px solid transparent;
+      border-right:175px solid transparent;
+      border-bottom:110px solid #7aa8d8;
+      z-index:6;
+    }
+
+    /* HEART */
+    .heart{
+      position:absolute;
+      width:40px;
+      height:40px;
+      background:#fff;
+      transform:rotate(45deg);
+      left:155px;
+      top:150px;
+      z-index:7;
+    }
+
+    .heart::before,
+    .heart::after{
+      content:'';
+      position:absolute;
+      width:40px;
+      height:40px;
+      background:#fff;
+      border-radius:50%;
+    }
+
+    .heart::before{
+      top:-20px;
+      left:0;
+    }
+
+    .heart::after{
+      left:-20px;
+      top:0;
+    }
+
+    /* ANIMATIONS */
+    @keyframes pullOut{
+      0%{
+        transform:translateY(120px);
+      }
+
+      30%{
+        transform:translateY(-70px);
+      }
+
+      70%{
+        transform:translateY(-70px);
+      }
+
+      100%{
+        transform:translateY(120px);
+      }
+    }
+
+    @keyframes flapOpen{
+      0%{
+        transform:rotateX(0deg);
+        z-index:8;
+      }
+
+      30%{
+        transform:rotateX(180deg);
+        z-index:1;
+      }
+
+      70%{
+        transform:rotateX(180deg);
+        z-index:1;
+      }
+
+      100%{
+        transform:rotateX(0deg);
+        z-index:8;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- LETTER -->
+    <div class="letter">
+      <h2>My Love 💙</h2>
+
+      <p>
+        You are the most beautiful part of my life.
+        Every moment with you feels magical and warm.
+        Thank you for being my happiness,
+        my comfort, and my forever.
+      </p>
+    </div>
+
+    <!-- ENVELOPE -->
+    <div class="envelope">
+
+      <div class="flap"></div>
+
+      <div class="base"></div>
+
+      <div class="left"></div>
+
+      <div class="right"></div>
+
+      <div class="bottom"></div>
+
+      <div class="heart"></div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
