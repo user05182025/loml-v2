@@ -8,7 +8,6 @@
         /* --- Styles & Aesthetic Colors --- */
         :root {
             --bg-color: #f0f4f8;        /* Soft, minimalist light blue background */
-            --primary-blue: #4a7c59;    /* Beautiful steel/pastel blue */
             --accent-blue: #68809a;     /* Accent blue for buttons/details */
             --text-dark: #2c3e50;       /* Dark slate for readable text */
             --envelope-color: #7fa1c3;  /* Perfect shade for the envelope */
@@ -42,6 +41,7 @@
             max-width: 400px;
             width: 90%;
             transition: all 0.5s ease;
+            z-index: 10;
         }
 
         h1 {
@@ -97,19 +97,19 @@
             display: none;
         }
 
-        /* --- Letter Screen (Hidden by default) --- */
+        /* --- Letter Screen --- */
         .letter-container {
             display: none;
-            position: relative;
+            position: absolute;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            width: 100%;
+            width: 100vw;
             opacity: 0;
             transition: opacity 1s ease;
         }
 
-        /* --- Envelope Animation & Setup --- */
+        /* --- Envelope Setup --- */
         .envelope-wrapper {
             position: relative;
             width: 300px;
@@ -118,11 +118,11 @@
             border-bottom-left-radius: 8px;
             border-bottom-right-radius: 8px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            cursor: pointer;
-            margin-top: 100px; /* Gives space for paper to slide up */
+            margin-top: 50px;
+            transition: transform 0.8s ease-in-out;
         }
 
-        /* The front flaps of the envelope */
+        /* Envelope Front Flaps */
         .envelope-wrapper::before {
             content: "";
             position: absolute;
@@ -151,7 +151,7 @@
             filter: brightness(0.9);
         }
 
-        /* The top triangle lid */
+        /* Envelope Top Lid */
         .envelope-lid {
             position: absolute;
             top: 0;
@@ -167,7 +167,7 @@
             filter: brightness(1.05);
         }
 
-        /* The actual letter inside */
+        /* --- The Letter Paper --- */
         .letter-paper {
             position: absolute;
             bottom: 5px;
@@ -175,40 +175,54 @@
             width: 270px;
             height: 180px;
             background: var(--paper-color);
-            border-radius: 4px;
-            padding: 20px;
+            border-radius: 8px;
+            padding: 25px;
             box-shadow: 0 0 10px rgba(0,0,0,0.05);
             z-index: 2;
-            transition: transform 0.8s ease-in-out 0.6s, height 0.8s ease-in-out 0.6s, width 0.8s ease-in-out 0.6s, left 0.8s ease-in-out 0.6s, bottom 0.8s ease-in-out 0.6s;
-            overflow: hidden;
+            
+            /* Smooth transitions for moving and resizing */
+            transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1) 0.6s, 
+                        height 0.8s ease 0.8s, 
+                        width 0.8s ease 0.8s, 
+                        left 0.8s ease 0.8s;
             color: #333;
         }
 
         .letter-text {
-            font-size: 13px;
+            font-size: 14px;
             line-height: 1.6;
             opacity: 0;
-            transition: opacity 0.5s ease 1.2s;
+            transition: opacity 0.5s ease 1.4s;
             text-align: left;
+            height: 100%;
+            overflow-y: auto; /* Adds scrolling capability if your letter is long */
         }
 
-        /* --- Triggered States after Login/Click --- */
+        /* --- Animated States --- */
+        
+        /* Step 1: Lid opens up */
         .open-envelope .envelope-lid {
             transform: rotateX(180deg);
-            z-index: 1; /* Move behind so paper can come out */
+            z-index: 1; 
         }
 
+        /* Step 2: Paper pulls OUT, comes DOWN, and centers on screen */
         .open-envelope .letter-paper {
-            transform: translateY(-150px); /* Slides the paper up out of envelope */
-            height: 380px;  /* Expands width and height so he can read it easily */
-            width: 340px;
-            left: -20px;
-            bottom: 50px;
-            z-index: 5;    /* Brings paper to the absolute front */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            overflow-y: auto; /* Adds a scrollbar if your text is super long */
+            /* Translates upward out of envelope, then scales/shifts right into center focus */
+            transform: translateY(-110px) scale(1); 
+            height: 400px;  
+            width: 350px;
+            left: -25px; /* Centers relative to the 300px envelope wrapper */
+            z-index: 5;    
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
         }
 
+        /* Shift down the envelope slightly as the letter comes up to create beautiful spacing */
+        .open-envelope .envelope-wrapper {
+            transform: translateY(80px);
+        }
+
+        /* Step 3: Text reveals beautifully */
         .open-envelope .letter-text {
             opacity: 1;
         }
@@ -216,32 +230,31 @@
 </head>
 <body>
 
-    <!-- SECTION 1: LOG IN PAGE -->
     <div class="login-container" id="loginPage">
         <h1>Happy Anniversary Lover</h1>
         <div class="subtext">clue: our anniversary date</div>
         
-        <!-- Change the placeholder text if you want to give him a hint format like (MMDDYY) -->
         <input type="password" id="passwordInput" placeholder="Enter the magic date...">
         <button onclick="checkPassword()">Unlock</button>
         <div class="error-msg" id="errorMsg">Hmm, that's not our special date. Try again!</div>
     </div>
 
-    <!-- SECTION 2: THE ENVELOPE & LETTER PAGE -->
     <div class="letter-container" id="letterPage">
         <div class="envelope-wrapper" id="envelope">
             <div class="envelope-lid"></div>
             <div class="letter-paper">
                 <div class="letter-text">
-                    <!-- PASTE YOUR DEAR LOVE LETTER TEXT RIGHT BELOW HERE -->
-                    <p style="font-weight: bold; margin-bottom: 10px; font-size: 16px; color: #4a7c59;">Happy Anniversary, My Favorite IT Expert! ❤️</p>
+                    <p style="font-weight: bold; margin-bottom: 12px; font-size: 16px; color: #52667a;">Happy Anniversary, My Favorite IT Expert! ❤️</p>
                     <p>
-                        [This is your sample text! I don't know much about IT or coding, but I know how much I love you, so I built this little corner of the internet just for us. You can send Gemini your actual letter whenever you are ready, and it will replace this text right here!]
+                        This is your sample text! I don't know much about IT or coding, but I know how much I love you, so I built this little corner of the internet just for us. 
                     </p>
-                    <p style="margin-top: 15px; font-style: italic; text-align: right;">Forever Yours,</p>
+                    <br>
+                    <p>
+                        You can send Gemini your actual letter whenever you are ready, and it will replace this text right here seamlessly! It will center perfectly on his screen now.
+                    </p>
+                    <p style="margin-top: 25px; font-style: italic; text-align: right;">Forever Yours,</p>
                     <p style="text-align: right; font-weight: bold;">Your Name</p>
-                    <!-- PASTE YOUR DEAR LOVE LETTER TEXT RIGHT ABOVE HERE -->
-                </div>
+                    </div>
             </div>
         </div>
     </div>
@@ -249,7 +262,6 @@
     <script>
         // --- CONFIGURATION ---
         // REPLACE THE '0000' BELOW WITH YOUR ACTUAL ANNIVERSARY DATE.
-        // Examples: '1024' for Oct 24, or '051222' for May 12, 2022. Keep it in quotes!
         const CORRECT_PASSWORD = "05182025"; 
 
         function checkPassword() {
@@ -260,33 +272,30 @@
             const envelope = document.getElementById("envelope");
 
             if (userInput === CORRECT_PASSWORD) {
-                // Fade out login page
                 loginPage.style.opacity = "0";
                 
                 setTimeout(() => {
                     loginPage.style.display = "none";
-                    
-                    // Fade in letter page
                     letterPage.style.display = "flex";
+                    
                     setTimeout(() => {
                         letterPage.style.opacity = "1";
                         
-                        // Wait a tiny bit, then trigger the beautiful open animation automatically
+                        // Triggers the sequence automatically
                         setTimeout(() => {
                             envelope.classList.add("open-envelope");
-                        }, 800);
+                        }, 600);
                         
                     }, 50);
                 }, 500);
 
             } else {
-                // Show error message if passcode is wrong
                 errorMsg.style.display = "block";
                 document.getElementById("passwordInput").value = "";
             }
         }
 
-        // Allows him to just hit "Enter" on his keyboard to submit
+        // Allows hitting "Enter" to submit
         document.getElementById("passwordInput").addEventListener("keypress", function(event) {
             if (event.key === "Enter") {
                 checkPassword();
