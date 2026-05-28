@@ -1,301 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Happy Anniversary 💙</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Anniversary!</title>
+    <style>
+        /* --- Styles & Aesthetic Colors --- */
+        :root {
+            --bg-color: #f0f4f8;        /* Soft, minimalist light blue background */
+            --primary-blue: #4a7c59;    /* Beautiful steel/pastel blue */
+            --accent-blue: #68809a;     /* Accent blue for buttons/details */
+            --text-dark: #2c3e50;       /* Dark slate for readable text */
+            --envelope-color: #7fa1c3;  /* Perfect shade for the envelope */
+            --paper-color: #ffffff;     /* Crisp white for the letter */
+        }
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: Arial, sans-serif;
-}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-body{
-    overflow:hidden;
-    background:#a9c4df;
-}
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
 
-/* LOGIN PAGE */
+        /* --- Log In Page Container --- */
+        .login-container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            max-width: 400px;
+            width: 90%;
+            transition: all 0.5s ease;
+        }
 
-#loginPage{
-    position:fixed;
-    width:100%;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#a9c4df;
-    z-index:10;
-}
+        h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
 
-.login-box{
-    background:white;
-    padding:40px;
-    border-radius:20px;
-    width:320px;
-    text-align:center;
-    box-shadow:0 10px 30px rgba(0,0,0,0.2);
-}
+        .subtext {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 24px;
+        }
 
-.login-box h1{
-    color:#5d7ea3;
-    margin-bottom:10px;
-}
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 1.5px solid #dcdde1;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            outline: none;
+            text-align: center;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
 
-.login-box p{
-    color:#777;
-    margin-bottom:20px;
-}
+        input[type="password"]:focus {
+            border-color: var(--accent-blue);
+        }
 
-input{
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:10px;
-    margin-bottom:15px;
-    background:#eef4fb;
-    font-size:16px;
-    text-align:center;
-}
+        button {
+            background-color: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
 
-button{
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:10px;
-    background:#6d94bd;
-    color:white;
-    font-size:16px;
-    cursor:pointer;
-    transition:0.3s;
-}
+        button:hover {
+            background-color: #52667a;
+        }
 
-button:hover{
-    background:#55789d;
-}
+        .error-msg {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
 
-#error{
-    color:red;
-    margin-top:10px;
-    font-size:14px;
-}
+        /* --- Letter Screen (Hidden by default) --- */
+        .letter-container {
+            display: none;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
 
-/* LETTER PAGE */
+        /* --- Envelope Animation & Setup --- */
+        .envelope-wrapper {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background-color: var(--envelope-color);
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            cursor: pointer;
+            margin-top: 100px; /* Gives space for paper to slide up */
+        }
 
-#letterPage{
-    display:none;
-    width:100%;
-    height:100vh;
-    position:relative;
-    overflow:hidden;
-    background:#a9c4df;
-}
+        /* The front flaps of the envelope */
+        .envelope-wrapper::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 3;
+            border-left: 150px solid transparent;
+            border-right: 150px solid var(--envelope-color);
+            border-top: 100px solid transparent;
+            border-bottom: 100px solid var(--envelope-color);
+            border-bottom-right-radius: 8px;
+            filter: brightness(0.95);
+        }
 
-/* floating hearts */
+        .envelope-wrapper::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 3;
+            border-left: 150px solid var(--envelope-color);
+            border-right: 150px solid transparent;
+            border-top: 100px solid transparent;
+            border-bottom: 100px solid var(--envelope-color);
+            border-bottom-left-radius: 8px;
+            filter: brightness(0.9);
+        }
 
-.heart{
-    position:absolute;
-    color:white;
-    font-size:20px;
-    opacity:0.6;
-    animation:float 10s linear infinite;
-}
+        /* The top triangle lid */
+        .envelope-lid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 110px solid var(--envelope-color);
+            transform-origin: top;
+            z-index: 4;
+            transition: transform 0.6s ease-in-out;
+            filter: brightness(1.05);
+        }
 
-@keyframes float{
-    from{
-        transform:translateY(100vh);
-        opacity:0;
-    }
-    to{
-        transform:translateY(-10vh);
-        opacity:1;
-    }
-}
+        /* The actual letter inside */
+        .letter-paper {
+            position: absolute;
+            bottom: 5px;
+            left: 15px;
+            width: 270px;
+            height: 180px;
+            background: var(--paper-color);
+            border-radius: 4px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+            z-index: 2;
+            transition: transform 0.8s ease-in-out 0.6s, height 0.8s ease-in-out 0.6s, width 0.8s ease-in-out 0.6s, left 0.8s ease-in-out 0.6s, bottom 0.8s ease-in-out 0.6s;
+            overflow: hidden;
+            color: #333;
+        }
 
-/* envelope */
+        .letter-text {
+            font-size: 13px;
+            line-height: 1.6;
+            opacity: 0;
+            transition: opacity 0.5s ease 1.2s;
+            text-align: left;
+        }
 
-.scene{
-    width:100%;
-    height:100%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
+        /* --- Triggered States after Login/Click --- */
+        .open-envelope .envelope-lid {
+            transform: rotateX(180deg);
+            z-index: 1; /* Move behind so paper can come out */
+        }
 
-.envelope{
-    position:relative;
-    width:420px;
-    height:280px;
-}
+        .open-envelope .letter-paper {
+            transform: translateY(-150px); /* Slides the paper up out of envelope */
+            height: 380px;  /* Expands width and height so he can read it easily */
+            width: 340px;
+            left: -20px;
+            bottom: 50px;
+            z-index: 5;    /* Brings paper to the absolute front */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            overflow-y: auto; /* Adds a scrollbar if your text is super long */
+        }
 
-/* paper */
-
-.paper{
-    position:absolute;
-    width:360px;
-    height:420px;
-    background:white;
-    left:30px;
-    bottom:20px;
-    border-radius:10px;
-    padding:35px;
-    z-index:1;
-    box-shadow:0 10px 25px rgba(0,0,0,0.15);
-
-    transform:translateY(220px);
-    animation:pullOut 2s ease forwards;
-    animation-delay:1s;
-
-    overflow-y:auto;
-}
-
-@keyframes pullOut{
-    to{
-        transform:translateY(-120px);
-    }
-}
-
-.paper h2{
-    color:#5d7ea3;
-    margin-bottom:20px;
-    text-align:center;
-}
-
-.paper p{
-    color:#444;
-    line-height:1.8;
-    font-size:16px;
-    white-space:pre-line;
-}
-
-/* envelope body */
-
-.envelope-back{
-    position:absolute;
-    width:420px;
-    height:260px;
-    background:#ffffff;
-    bottom:0;
-    border-radius:10px;
-    z-index:2;
-    box-shadow:0 10px 30px rgba(0,0,0,0.15);
-}
-
-/* flap */
-
-.flap{
-    position:absolute;
-    width:0;
-    height:0;
-    border-left:210px solid transparent;
-    border-right:210px solid transparent;
-    border-top:140px solid #dce9f7;
-    top:0;
-    z-index:4;
-
-    transform-origin:top;
-    animation:openFlap 1s ease forwards;
-}
-
-@keyframes openFlap{
-    to{
-        transform:rotateX(180deg);
-        z-index:0;
-    }
-}
-</style>
+        .open-envelope .letter-text {
+            opacity: 1;
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- LOGIN PAGE -->
-
-<div id="loginPage">
-    <div class="login-box">
-        <h1>Happy Anniversary Lover 💙</h1>
-        <p>Clue: our anniversary date</p>
-
-        <input type="text" id="password"
-        placeholder="MM/DD/YYYY">
-
-        <button onclick="checkPassword()">Open Letter</button>
-
-        <div id="error"></div>
+    <!-- SECTION 1: LOG IN PAGE -->
+    <div class="login-container" id="loginPage">
+        <h1>Happy Anniversary Lover</h1>
+        <div class="subtext">clue: our anniversary date</div>
+        
+        <!-- Change the placeholder text if you want to give him a hint format like (MMDDYY) -->
+        <input type="password" id="passwordInput" placeholder="Enter the magic date...">
+        <button onclick="checkPassword()">Unlock</button>
+        <div class="error-msg" id="errorMsg">Hmm, that's not our special date. Try again!</div>
     </div>
-</div>
 
-<!-- LETTER PAGE -->
-
-<div id="letterPage">
-
-    <!-- floating hearts -->
-    <div class="heart" style="left:10%; animation-delay:0s;">♡</div>
-    <div class="heart" style="left:30%; animation-delay:2s;">♡</div>
-    <div class="heart" style="left:50%; animation-delay:4s;">♡</div>
-    <div class="heart" style="left:70%; animation-delay:1s;">♡</div>
-    <div class="heart" style="left:90%; animation-delay:3s;">♡</div>
-
-    <div class="scene">
-
-        <div class="envelope">
-
-            <!-- LETTER -->
-            <div class="paper">
-                <h2>My Love 💙</h2>
-
-                <p>
-PUT YOUR LOVE LETTER HERE
-
-Example:
-
-Happy Anniversary, love.
-
-Thank you for staying beside me through everything.
-You make my life softer, happier, and more beautiful.
-
-No matter what happens,
-I will always choose you.
-
-I love you endlessly 💙
-                </p>
+    <!-- SECTION 2: THE ENVELOPE & LETTER PAGE -->
+    <div class="letter-container" id="letterPage">
+        <div class="envelope-wrapper" id="envelope">
+            <div class="envelope-lid"></div>
+            <div class="letter-paper">
+                <div class="letter-text">
+                    <!-- PASTE YOUR DEAR LOVE LETTER TEXT RIGHT BELOW HERE -->
+                    <p style="font-weight: bold; margin-bottom: 10px; font-size: 16px; color: #4a7c59;">Happy Anniversary, My Favorite IT Expert! ❤️</p>
+                    <p>
+                        [This is your sample text! I don't know much about IT or coding, but I know how much I love you, so I built this little corner of the internet just for us. You can send Gemini your actual letter whenever you are ready, and it will replace this text right here!]
+                    </p>
+                    <p style="margin-top: 15px; font-style: italic; text-align: right;">Forever Yours,</p>
+                    <p style="text-align: right; font-weight: bold;">Your Name</p>
+                    <!-- PASTE YOUR DEAR LOVE LETTER TEXT RIGHT ABOVE HERE -->
+                </div>
             </div>
-
-            <!-- ENVELOPE -->
-            <div class="envelope-back"></div>
-
-            <!-- FLAP -->
-            <div class="flap"></div>
-
         </div>
-
     </div>
 
-</div>
+    <script>
+        // --- CONFIGURATION ---
+        // REPLACE THE '0000' BELOW WITH YOUR ACTUAL ANNIVERSARY DATE.
+        // Examples: '1024' for Oct 24, or '051222' for May 12, 2022. Keep it in quotes!
+        const CORRECT_PASSWORD = "05182025"; 
 
-<script>
-function checkPassword(){
+        function checkPassword() {
+            const userInput = document.getElementById("passwordInput").value;
+            const loginPage = document.getElementById("loginPage");
+            const letterPage = document.getElementById("letterPage");
+            const errorMsg = document.getElementById("errorMsg");
+            const envelope = document.getElementById("envelope");
 
-    const password =
-    document.getElementById("password").value;
+            if (userInput === CORRECT_PASSWORD) {
+                // Fade out login page
+                loginPage.style.opacity = "0";
+                
+                setTimeout(() => {
+                    loginPage.style.display = "none";
+                    
+                    // Fade in letter page
+                    letterPage.style.display = "flex";
+                    setTimeout(() => {
+                        letterPage.style.opacity = "1";
+                        
+                        // Wait a tiny bit, then trigger the beautiful open animation automatically
+                        setTimeout(() => {
+                            envelope.classList.add("open-envelope");
+                        }, 800);
+                        
+                    }, 50);
+                }, 500);
 
-    // CHANGE THIS
-    if(password === "05/18/2025"){
+            } else {
+                // Show error message if passcode is wrong
+                errorMsg.style.display = "block";
+                document.getElementById("passwordInput").value = "";
+            }
+        }
 
-        document.getElementById("loginPage")
-        .style.display = "none";
-
-        document.getElementById("letterPage")
-        .style.display = "block";
-
-    }else{
-        document.getElementById("error")
-        .innerText = "Wrong anniversary date 💔";
-    }
-}
-</script>
-
+        // Allows him to just hit "Enter" on his keyboard to submit
+        document.getElementById("passwordInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                checkPassword();
+            }
+        });
+    </script>
 </body>
 </html>
