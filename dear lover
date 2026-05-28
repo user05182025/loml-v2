@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Love Letter Animation</title>
+  <title>Happy Anniversary Lover 💙</title>
 
   <style>
     *{
@@ -14,185 +14,171 @@
     }
 
     body{
+      background: linear-gradient(to bottom, #b7d7f7, #dcecff);
       height:100vh;
+      overflow:hidden;
       display:flex;
       justify-content:center;
       align-items:center;
-      background:#7aa8d8; /* CHANGE BACKGROUND COLOR */
-      overflow:hidden;
+      color:#1d3557;
     }
 
     .container{
-      position:relative;
-      width:350px;
-      height:300px;
+      width:100%;
+      padding:20px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
     }
 
-    /* PAPER */
+    /* LOGIN PAGE */
+
+    .login-box{
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(12px);
+      padding:35px 25px;
+      border-radius:25px;
+      width:100%;
+      max-width:350px;
+      text-align:center;
+      box-shadow:0 8px 30px rgba(0,0,0,0.1);
+      animation:fadeIn 1s ease;
+    }
+
+    .login-box h1{
+      font-size:28px;
+      margin-bottom:12px;
+      color:#0d3b66;
+    }
+
+    .login-box p{
+      margin-bottom:20px;
+      color:#355070;
+      font-size:15px;
+    }
+
+    input{
+      width:100%;
+      padding:14px;
+      border:none;
+      border-radius:15px;
+      outline:none;
+      margin-bottom:18px;
+      font-size:16px;
+      text-align:center;
+      background:white;
+    }
+
+    button{
+      background:#4ea8de;
+      color:white;
+      border:none;
+      padding:14px 24px;
+      border-radius:15px;
+      font-size:16px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    button:hover{
+      background:#219ebc;
+      transform:scale(1.03);
+    }
+
+    /* LETTER PAGE */
+
+    .letter-page{
+      display:none;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+      width:100%;
+      animation:fadeIn 1s ease;
+    }
+
+    .envelope{
+      position:relative;
+      width:320px;
+      height:220px;
+      background:#ffffff;
+      border-radius:12px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.15);
+      overflow:hidden;
+    }
+
+    .envelope::before{
+      content:'';
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:#d7ecff;
+      clip-path:polygon(0 0, 50% 50%, 100% 0);
+      z-index:2;
+    }
+
     .letter{
       position:absolute;
-      width:280px;
-      height:190px;
+      width:88%;
+      height:230px;
       background:white;
-      left:35px;
-      bottom:60px;
+      left:6%;
+      top:100px;
       border-radius:10px;
-      padding:20px;
+      padding:25px;
       z-index:1;
-
-      animation: pullOut 4s ease-in-out infinite;
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
+      animation:slideUp 2s ease forwards;
+      overflow:auto;
     }
 
     .letter h2{
-      color:#4a76a8;
-      margin-bottom:10px;
-      font-size:22px;
+      text-align:center;
+      margin-bottom:18px;
+      color:#0d3b66;
     }
 
     .letter p{
-      font-size:14px;
-      color:#555;
-      line-height:1.6;
+      font-size:15px;
+      line-height:1.8;
+      color:#355070;
+      white-space:pre-line;
     }
 
-    /* ENVELOPE BODY */
-    .envelope{
-      position:absolute;
-      width:350px;
-      height:220px;
-      bottom:0;
-      left:0;
-    }
-
-    .base{
-      position:absolute;
-      width:100%;
-      height:100%;
-      background:#5f8fc4; /* CHANGE ENVELOPE COLOR */
-      border-radius:0 0 15px 15px;
-      z-index:3;
-    }
-
-    /* TOP FLAP */
-    .flap{
-      position:absolute;
-      width:0;
-      height:0;
-      border-left:175px solid transparent;
-      border-right:175px solid transparent;
-      border-top:120px solid #4d7caf;
-      top:0;
-      transform-origin:top;
-      animation: flapOpen 4s ease-in-out infinite;
-      z-index:4;
-    }
-
-    /* LEFT TRIANGLE */
-    .left{
-      position:absolute;
-      width:0;
-      height:0;
-      border-top:110px solid transparent;
-      border-bottom:110px solid transparent;
-      border-left:175px solid #6c9cd1;
-      z-index:5;
-    }
-
-    /* RIGHT TRIANGLE */
-    .right{
-      position:absolute;
-      right:0;
-      width:0;
-      height:0;
-      border-top:110px solid transparent;
-      border-bottom:110px solid transparent;
-      border-right:175px solid #6c9cd1;
-      z-index:5;
-    }
-
-    /* BOTTOM TRIANGLE */
-    .bottom{
-      position:absolute;
-      bottom:0;
-      width:0;
-      height:0;
-      border-left:175px solid transparent;
-      border-right:175px solid transparent;
-      border-bottom:110px solid #7aa8d8;
-      z-index:6;
-    }
-
-    /* HEART */
-    .heart{
-      position:absolute;
-      width:40px;
-      height:40px;
-      background:#fff;
-      transform:rotate(45deg);
-      left:155px;
-      top:150px;
-      z-index:7;
-    }
-
-    .heart::before,
-    .heart::after{
-      content:'';
-      position:absolute;
-      width:40px;
-      height:40px;
-      background:#fff;
-      border-radius:50%;
-    }
-
-    .heart::before{
-      top:-20px;
-      left:0;
-    }
-
-    .heart::after{
-      left:-20px;
-      top:0;
-    }
-
-    /* ANIMATIONS */
-    @keyframes pullOut{
+    @keyframes slideUp{
       0%{
-        transform:translateY(120px);
-      }
-
-      30%{
-        transform:translateY(-70px);
-      }
-
-      70%{
-        transform:translateY(-70px);
+        top:120px;
       }
 
       100%{
-        transform:translateY(120px);
+        top:-30px;
       }
     }
 
-    @keyframes flapOpen{
-      0%{
-        transform:rotateX(0deg);
-        z-index:8;
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(10px);
       }
 
-      30%{
-        transform:rotateX(180deg);
-        z-index:1;
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    @media(max-width:480px){
+
+      .envelope{
+        width:290px;
+        height:200px;
       }
 
-      70%{
-        transform:rotateX(180deg);
-        z-index:1;
+      .letter{
+        height:220px;
       }
 
-      100%{
-        transform:rotateX(0deg);
-        z-index:8;
-      }
     }
 
   </style>
@@ -202,36 +188,71 @@
 
   <div class="container">
 
-    <!-- LETTER -->
-    <div class="letter">
-      <h2>My Love 💙</h2>
+    <!-- LOGIN PAGE -->
 
-      <p>
-        You are the most beautiful part of my life.
-        Every moment with you feels magical and warm.
-        Thank you for being my happiness,
-        my comfort, and my forever.
-      </p>
+    <div class="login-box" id="loginPage">
+
+      <h1>Happy Anniversary Lover 💙</h1>
+
+      <p>Clue: our anniversary date</p>
+
+      <input type="password" id="password" placeholder="Enter date here">
+
+      <button onclick="openLetter()">
+        Open Letter
+      </button>
+
     </div>
 
-    <!-- ENVELOPE -->
-    <div class="envelope">
 
-      <div class="flap"></div>
 
-      <div class="base"></div>
+    <!-- LETTER PAGE -->
 
-      <div class="left"></div>
+    <div class="letter-page" id="letterPage">
 
-      <div class="right"></div>
+      <div class="envelope">
 
-      <div class="bottom"></div>
+        <div class="letter">
 
-      <div class="heart"></div>
+          <h2>Dear Lover, </h2>
+
+          <p>
+
+WRITE YOUR MESSAGE HERE
+
+          </p>
+
+        </div>
+
+      </div>
 
     </div>
 
   </div>
+
+  <script>
+
+    function openLetter(){
+
+      const password = document.getElementById("password").value;
+
+      if(password === "05/18/2025"){
+
+        document.getElementById("loginPage").style.display = "none";
+
+        document.getElementById("letterPage").style.display = "flex";
+
+      }
+
+      else{
+
+        alert("Wrong anniversary date 💔");
+
+      }
+
+    }
+
+  </script>
 
 </body>
 </html>
