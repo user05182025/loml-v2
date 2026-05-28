@@ -179,7 +179,7 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.05);
             z-index: 2;
             
-            /* Powerful dynamic transition handling movement, resizing, and centering */
+            /* Handles movement, resizing, and centering dynamically */
             transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1), 
                         height 0.8s ease, 
                         width 0.8s ease,
@@ -212,16 +212,16 @@
             transform: translateY(120px);
         }
 
-        /* 3. The Letter paper shoots UP out of envelope, then breaks free to center perfectly */
+        /* 3. The Letter paper breaks free to center perfectly on any screen */
         .open-envelope .letter-paper {
-            position: fixed; /* Forces it out of the container layout constraints */
+            position: fixed; 
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%); /* Keeps it completely locked to the center of any viewport */
-            height: 450px;  
+            transform: translate(-50%, -50%); 
+            height: 480px;  
             width: 360px;
             max-width: 90vw;
-            max-height: 75vh;
+            max-height: 80vh;
             z-index: 50;    
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
         }
@@ -248,24 +248,32 @@
             <div class="envelope-lid"></div>
             <div class="letter-paper">
                 <div class="letter-text">
-                    <p style="font-weight: bold; margin-bottom: 12px; font-size: 16px; color: #52667a;">Happy Anniversary, My Favorite IT Expert! ❤️</p>
+                    <p style="font-weight: bold; margin-bottom: 12px; font-size: 18px; color: #52667a; text-align: center;">Happy 365 days with You ❤️</p>
+                    
+                    <p>Dear Lover,</p>
+                    <br>
                     <p>
-                        This is your sample text! I don't know much about IT or coding, but I know how much I love you, so I built this little corner of the internet just for us. 
+                        Happy Anniversary to Us! What do you mean it was already a year ago when I said yes? Parang kailan lang nasa “Magnets” era pa tayo ni NIKI XD. We really tried to stop a lot of times pero wala e ako talaga para sayo (corny). You survived the “Lord kung hindi siya para sakin alisin mona siya sa buhay ko” hahaha. 
                     </p>
                     <br>
                     <p>
-                        You can send Gemini your actual letter whenever you are ready, and it will replace this text right here seamlessly! It will center perfectly on his screen now.
+                        Sobrang thankful ako sa lahat ng efforts simula nung una lalo na nasa Angeles palang ako na appreciate ko lahat ng ilang oras mong byahe just to spend 6? 5? hours with me. Thank you rin sa lahat ng gifts and flowers! And syempre sa lahat ng libreng pagkain, soon ako naman manlilibri hihi.
                     </p>
+                    <br>
+                    <p>
+                        I don't know much about IT or coding, but I know how much I love you, hope you like this! I love you, baby!
+                    </p>
+                    
                     <p style="margin-top: 25px; font-style: italic; text-align: right;">Forever Yours,</p>
-                    <p style="text-align: right; font-weight: bold;">Your Name</p>
-                    </div>
+                    <p style="text-align: right; font-weight: bold; color: #52667a;">Traizy Arciga</p>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
         // --- CONFIGURATION ---
-        // REPLACE THE '0000' BELOW WITH YOUR ACTUAL ANNIVERSARY DATE.
+        // REMEMBER: Change the '0000' below to your actual anniversary date!
         const CORRECT_PASSWORD = "05182025"; 
 
         function checkPassword() {
@@ -285,7 +293,7 @@
                     setTimeout(() => {
                         letterPage.style.opacity = "1";
                         
-                        // Triggers the opening animation sequence
+                        // Triggers the animation sequence
                         setTimeout(() => {
                             envelope.classList.add("open-envelope");
                         }, 500);
